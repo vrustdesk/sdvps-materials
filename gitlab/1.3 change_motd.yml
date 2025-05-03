@@ -1,0 +1,12 @@
+---
+- name: Change MOTD message
+  hosts: all
+  become: true
+  vars:
+    welcome_msg: "Hello {{ ansible_hostname }} (IP: {{ ansible_default_ipv4.address }})"
+  
+  tasks:
+    - name: Update MOTD
+      ansible.builtin.copy:
+        content: "{{ welcome_msg }}"
+        dest: /etc/motd
